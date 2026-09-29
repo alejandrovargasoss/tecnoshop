@@ -1,4 +1,4 @@
-  <?php
+<?php
 // Dashboard principal — Chart.js + IA + Últimas ventas
 $totalProductos = $conexion->query("SELECT COUNT(*) AS t FROM productos WHERE estado='activo'")->fetch_assoc()['t'] ?? 0;
 $totalClientes  = $conexion->query("SELECT COUNT(*) AS t FROM clientes  WHERE estado='activo'")->fetch_assoc()['t'] ?? 0;
