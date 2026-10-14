@@ -5,6 +5,12 @@ class VentaControlador {
     public function __construct($bd) { $this->modelo = new VentaModelo($bd); }
 
     public function listar() {
+        try {
+            // listar ventas
+            Logger::info('Listado de Ventas', ['usuario' => $_SESSION['id_usuario']]);
+        } catch (Exception $e) {
+            Logger::error('Error al listar ventas', ['error' => $e->getMessage()]);
+        }
         header('Content-Type: text/html; charset=utf-8');
         require_once __DIR__ . '/../vistas/layout/header.php';
         require_once __DIR__ . '/../vistas/ventas/lista.php';
@@ -12,11 +18,22 @@ class VentaControlador {
     }
 
     public function obtenerTodos() {
-        $datos = $this->modelo->obtenerTodos();
+        try {
+            $datos = $this->modelo->obtenerTodos();
+            Logger::info('Datos de Ventas obtenidos', ['usuario' => $_SESSION['id_usuario']]);
+        } catch (Exception $e) {
+            Logger::error('Error al obtener ventas', ['error' => $e->getMessage()]);
+        }
         echo json_encode(['ok'=>true,'datos'=>$datos,'total'=>count($datos)]);
     }
 
     public function guardar() {
+        try {
+            // guardar venta
+            Logger:: info('Venta Guardada', ['datos' => $_POST]);
+        } catch (Exception $e) {
+            Logger:: error('Error al guardar venta', ['error' => $e->getMessage()]);
+        }
         $d = json_decode(file_get_contents('php://input'), true) ?? [];
         if (empty($d['id_cliente'])) {
             http_response_code(400);

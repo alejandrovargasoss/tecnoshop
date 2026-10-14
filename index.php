@@ -14,7 +14,6 @@ header('Strict-Transport-Security: max-age=31536000; includeSubDomains');
 header('Referrer-Policy: strict-origin-when-cross-origin');
 
 // Continuar con el resto del sistema...
-
 /**
  * index.php — Front Controller TecnoShop
  * Único punto de entrada al sistema MVC
